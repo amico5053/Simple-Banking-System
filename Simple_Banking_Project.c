@@ -10,44 +10,7 @@ void clearInput() // Function to Clear previous inputs and continue reading even
 	int choice;
 	while((choice = getchar()) !='\n' && choice !=EOF);
 }
-int main()
-{
-	int option;
-	do
-	{
-		printf("\nSimple Banking System:\n"); // name of the software.
-		printf("1. Create Account\n"); // Option Create Account.
-		printf("2. Deposit Money\n"); // Option Deposit Money.
-		printf("3. Withdraw Money\n"); // Option Withdraw Money.
-		printf("4. Display Account Details\n"); // Option Display Account Details.
-		printf("5. Exit\n"); // Option Exit Program.
-		printf("Enter Your Choice :"); // User Selected Option.
-		scanf("%d",&option); // Storing Selected option in the variable for functions to use based on program.
-		clearInput(); // calling clear input function.
-		switch(option)
-		{
-			case 1:
-				createAccount(); // if option 1 call account create function.
-				break;
-			case 2:
-				depositMoney(); // if option 2 call deposit money function.
-				break;
-			case 3:
-				withdrawMoney(); // if option 3 call withdrawal function.
-				break;
-			case 4:
-				displayAccount(); // if option 4 call display account details function.
-				break;
-			case 5:
-				printf("Exiting...\n"); // if option 5 display exiting message.
-				break;
-			default :
-				printf("Invalid Option, Please try again.\n"); // if user input is undefined (other than options available),display error message.
-		}
-	}
-	while (option != 5 ); // keep the program running untill the user chooses, option to exit.
-	return 0;
-}
+
 void createAccount() // declairing of create account function.
 {
 	int acNumber; // declaration of local varibale integer to use inside create account function.
@@ -71,7 +34,7 @@ void createAccount() // declairing of create account function.
 		}    	
 	}
 	printf("Enter A/C name: "); // if no duplication found. prompt for account name.
-	gets(acName); // scans account name as strings and store in local variable account name array.
+	fgets(acName,99,stdin); // scans account name as strings and store in local variable account name array.
 	printf("Enter initial deposit: "); // prompt for initial deposit.
 	scanf("%f",&acBalance); // scans account balance and stores in local variable account balance float.
 	if(acBalance < 50) // setting a limitation of 50 and checking minimum balance for account opening.
@@ -164,10 +127,67 @@ void withdrawMoney() // declaraing of withdraw money function
 }
 void displayAccount()
 {
-	
+	int acNumber; // declaration of local varibale integer to use inside withdraw money function.
+	printf("Enter account number:"); // prompt for account number.
+	scanf("%d",&acNumber); // scanning and storing into local variable account number.
+	clearInput(); // calling the clear input function.
+	int acIndex = findAccountIndex(acNumber); // calling the account index find function and retreiving row index.
+	if(accountNumbers[acIndex] == acNumber)
+	{
+		printf("Account Holder: %s \t",accountNames); // displaying acount holder name.
+		printf("Account Number: %d\t",accountNumbers[acIndex]); // displaying acount holder's account number.	
+		printf("Current Balance: %.2f\n",accountBalances[acIndex]); // displaying current Balance.		
+	}	
 }
 int findAccountIndex(int accNo)
 {
-	
+	int accIndex; // local varibale for storing account number index.
+	for(i = 0; i < count; i++) // looping through account numbers.
+	{
+		if(accountNumbers[i] == accNo) // verifying account number before getting the account index.
+		{
+			accIndex = i; // storing account number index to local variable.
+			return;
+		}
+	}
+	printf("Account does not exist.\n"); // display account not found message.
 	return;	
+}
+int main()
+{
+	int option;
+	do
+	{
+		printf("\nSimple Banking System:\n"); // name of the software.
+		printf("1. Create Account\n"); // Option Create Account.
+		printf("2. Deposit Money\n"); // Option Deposit Money.
+		printf("3. Withdraw Money\n"); // Option Withdraw Money.
+		printf("4. Display Account Details\n"); // Option Display Account Details.
+		printf("5. Exit\n"); // Option Exit Program.
+		printf("Enter Your Choice :"); // User Selected Option.
+		scanf("%d",&option); // Storing Selected option in the variable for functions to use based on program.
+		clearInput(); // calling clear input function.
+		switch(option)
+		{
+			case 1:
+				createAccount(); // if option 1 call account create function.
+				break;
+			case 2:
+				depositMoney(); // if option 2 call deposit money function.
+				break;
+			case 3:
+				withdrawMoney(); // if option 3 call withdrawal function.
+				break;
+			case 4:
+				displayAccount(); // if option 4 call display account details function.
+				break;
+			case 5:
+				printf("Exiting...\n"); // if option 5 display exiting message.
+				break;
+			default :
+				printf("Invalid Option, Please try again.\n"); // if user input is undefined (other than options available),display error message.
+		}
+	}
+	while (option != 5 ); // keep the program running untill the user chooses, option to exit.
+	return 0;
 }
