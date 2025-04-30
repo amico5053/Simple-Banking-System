@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-const maxAc = 50;
+const maxAc = 50; // maximum number of accounts.
 int accountNumbers[50]; // global array variavle for account numbers.
 char accountNames[50][50]; // global 2D array variable for account names.
 float accountBalances[50]; // global array for numbers with decimals.
