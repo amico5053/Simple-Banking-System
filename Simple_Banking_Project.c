@@ -2,7 +2,7 @@
 #include<string.h>
 const maxAc = 50;
 int accountNumbers[50]; // global array variavle for account numbers.
-char accountNames[50]; // global array variable for account names.
+char accountNames[50][50]; // global 2D array variable for account names.
 float accountBalances[50]; // global array for numbers with decimals.
 int i, count; // global integer variables.
 void clearInput() // Function to Clear previous inputs and continue reading even if it's a new line and not the end of file. 
@@ -43,7 +43,7 @@ void createAccount() // declairing of create account function.
 		return;
 	}
 	accountNumbers[count] = acNumber; // storing local variable account number into global variable account numbers array.
-	accountNames[count] = acName; // storing local variable account name into  global variable account names array.
+	strcpy(accountNames[count],acName); // storing local variable account name into  global variable account names array.
 	accountBalances[count] = acBalance; // storing local variable balance into global variable account balance array.
 	count++; // incrementing the count (index of the row) to insert next record.
 	printf("Account successfully created.\n");	// display success message for account creation.
@@ -134,8 +134,8 @@ void displayAccount()
 	int acIndex = findAccountIndex(acNumber); // calling the account index find function and retreiving row index.
 	if(accountNumbers[acIndex] == acNumber)
 	{
-		printf("Account Holder: %s \t",accountNames); // displaying acount holder name.
-		printf("Account Number: %d\t",accountNumbers[acIndex]); // displaying acount holder's account number.	
+		printf("Account Holder: %s",accountNames[acIndex]); // displaying acount holder name.
+		printf("Account Number: %d\n",accountNumbers[acIndex]); // displaying acount holder's account number.	
 		printf("Current Balance: %.2f\n",accountBalances[acIndex]); // displaying current Balance.		
 	}	
 }
