@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-const maxAc = 50; // maximum number of accounts.
+const maxAc = 50;
 int accountNumbers[50]; // global array variavle for account numbers.
 char accountNames[50][50]; // global 2D array variable for account names.
 float accountBalances[50]; // global array for numbers with decimals.
@@ -34,7 +34,7 @@ void createAccount() // declairing of create account function.
 		}    	
 	}
 	printf("Enter A/C name: "); // if no duplication found. prompt for account name.
-	fgets(acName,99,stdin); // scans account name as strings and store in local variable account name array.
+	fgets(acName,49,stdin); // scans account name as strings and store in local variable account name array.
 	printf("Enter initial deposit: "); // prompt for initial deposit.
 	scanf("%f",&acBalance); // scans account balance and stores in local variable account balance float.
 	if(acBalance < 50) // setting a limitation of 50 and checking minimum balance for account opening.
